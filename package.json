@@ -1,0 +1,13 @@
+{
+  "name": "theOracle",
+  "version": "1.0.0",
+  "description": "Node.js CLI to access the Brahma Services",
+  "main": "index.js",
+  "repository": "https://github.com/anoopk/theOracle",
+  "author": "Anoop Kumar",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.20.0",
+    "inquirer": "^6.3.1"
+  }
+}
