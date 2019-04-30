@@ -3,9 +3,9 @@
 const fs = require('fs')
 var json = new Map()
 	
-const learn = (entity, name, type, tags, image, text) => {
-	if(!image){
-		image = entity+".jpg"
+const learn = (entity, name, type, tags, image, text) => {	
+	if(null == image){
+		image = entity + ".jpg"
 	}
 
 	if(!text){
@@ -22,7 +22,7 @@ const learn = (entity, name, type, tags, image, text) => {
 		var specials = fs.readFileSync(entity + ".json")	
 		json = JSON.parse(specials)
 		refresh(entity)		
-		console.log("Updating ", json);
+		console.log("Updating ", entity);
 	}
 	catch(err){
 		console.log("Creating a new ", entity);
@@ -103,7 +103,7 @@ program
   .command('learn <Entity> <Name> <Type> [Tags] [Image] [Text]')
   .alias('k')
   .description('Teaches theOracle new specials. Say entity (think of it as a unique pet name), name, type and optionally a set of comma separated Tags, image or text that represents the entity')
-  .action((entity, name, type, tags, image, text) => learn(entity, name, type, tags));
+  .action((entity, name, type, tags, image, text) => learn(entity, name, type, tags, image, text));
 
 program.parse(process.argv);
 
