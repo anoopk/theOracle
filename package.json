@@ -1,11 +1,14 @@
 {
   "name": "theOracle",
   "version": "1.0.0",
-  "description": "Node.js CLI to access the Brahma Services",
+  "description": "Common Node.js CLI to access the theOracle, a facade in front of a bunch of Text and Image analytic services. Right now supports teaching theOracle specials",
   "main": "index.js",
   "repository": "https://github.com/anoopk/theOracle",
   "author": "Anoop Kumar",
   "license": "MIT",
+  "bin": {
+        "theO": "node ./index.js"
+  },  
   "dependencies": {
     "commander": "^2.20.0",
     "inquirer": "^6.3.1"
