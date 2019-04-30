@@ -7,8 +7,8 @@
   "author": "Anoop Kumar",
   "license": "MIT",
   "bin": {
-        "theO": "./bin/index.js"
-  },  
+    "theO": "./bin/index.js"
+  },
   "dependencies": {
     "commander": "^2.20.0",
     "inquirer": "^6.3.1"
