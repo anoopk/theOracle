@@ -32,6 +32,10 @@ const learn = (entity, name, type, tags, image, text) => {
 
 const forget = (entity) => {
 	try{
+		var knowledge = require('../knowledge.json')
+		knowledge.entities.splice(knowledge.entities.indexOf(entity), 1)
+		fs.writeFileSync('./knowledge.json', JSON.stringify(knowledge))	
+		
 		fs.unlinkSync(entity + ".json")	
 	}
 	catch(err){
@@ -43,7 +47,7 @@ const forget = (entity) => {
 const listSpecials = () => {
 	try{
 		var knowledge = require('../knowledge.json')		
-		console.log(knowledge)	
+		assert(knowledge.entities)	
 	}
 	catch(err){
 		console.log("I have no Specials to offer. Teach me. Type theO --help to learn how.");
@@ -108,6 +112,8 @@ program
 program
   .command('learn <Entity> <Name> <Type> [Tags] [Image] [Text]')
   .alias('k')
+  .option('-i, --image', "Image representation of the special")
+  .option('-i, --image', "Text that represents the special")
   .description('Teaches theOracle new specials. Say entity (think of it as a unique pet name), name, type and optionally a set of comma separated Tags, image or text that represents the entity')
   .action((entity, name, type, tags, image, text) => learn(entity, name, type, tags, image, text));
 
