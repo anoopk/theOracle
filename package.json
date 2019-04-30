@@ -7,7 +7,7 @@
   "author": "Anoop Kumar",
   "license": "MIT",
   "bin": {
-        "theO": "node ./index.js"
+        "theO": "./bin/index.js"
   },  
   "dependencies": {
     "commander": "^2.20.0",

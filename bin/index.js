@@ -54,7 +54,7 @@ const program = require('commander');
 
 program
   .version('0.0.1')
-  .description("Common Node.js CLI to access the theOracle, a facade in front of a bunch of Text and Image analytic services. Right now supports teaching theOracle specials");
+  .description('Node.js CLI for Brahma Services');
 
 program
   .command('forget <Entity>')
