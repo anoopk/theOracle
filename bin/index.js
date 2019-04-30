@@ -3,11 +3,21 @@
 const fs = require('fs')
 var json = new Map()
 	
-const learn = (entity, name, type, tags) => {
+const learn = (entity, name, type, tags, image, text) => {
+	if(!image){
+		image = entity+".jpg"
+	}
+
+	if(!text){
+		text = name
+	}
+	
 	json.entity = new Map()
+	json.entity.image = image
+	json.entity.text = text
 	json.entity.name = name
 	json.entity.type = type
-	json.entity.tags = tags
+	json.entity.tags = tags	
 	try{		
 		var specials = fs.readFileSync(entity + ".json")	
 		json = JSON.parse(specials)
@@ -16,7 +26,7 @@ const learn = (entity, name, type, tags) => {
 	}
 	catch(err){
 		console.log("Creating a new ", entity);
-		refresh(entity)
+		refresh(entity)	
 	}
 }
 
@@ -30,20 +40,35 @@ const forget = (entity) => {
 	}	
 }
 
-const list = (entity, tags) => {
+const listSpecials = () => {
 	try{
-		var special = fs.readFileSync(entity + ".json")	
+		var special = fs.readFileSync(knowledge + ".json")	
 		json = JSON.parse(special)
-		if(tags){
-			console.log(json.entity.tags)
-			return json.entity.tags
-		}
-		else console.log(json.entity)
+		console.log(json)
+		return json
 	}
 	catch(err){
-		console.log("I do not know", entity, '.');
-		console.log("Teach me. Type --help");
+		console.log("I have no Specials to offer. Teach me. Type theO --help to learn how.");
 	}
+}
+
+const list = (entity, what) => {
+	if(entity){
+		try{
+			var special = fs.readFileSync(entity + ".json")	
+			json = JSON.parse(special)
+			if(what){
+				console.log(json.entity[what])
+				return json.entity.what
+			}
+			else console.log(json.entity)
+		}
+		catch(err){
+			console.log("I do not know", entity, '.');
+			console.log("Teach me. Type --help");
+		}
+	}
+	else listSpecials()
 }
 
 function refresh(entity){
@@ -63,16 +88,22 @@ program
   .action((entity) => forget(entity))
 
 program
-  .command('list <Entity> [Name] Type] [Tags]')
+  .command('list [Entity] [Name] Type] [Tags]')
   .alias('l')
-  .description('List all specials on offer')
+  .description('Details of the Special')
   .action((entity, name, type, tags) => list(entity, name, type, tags))
 
 program
-  .command('learn <Entity> <Name> <Type> [Tags]')
+  .command('listSpecials')
+  .alias('l')
+  .description('List all Specials')
+  .action(() => listSpecials())
+
+program
+  .command('learn <Entity> <Name> <Type> [Tags] [Image] [Text]')
   .alias('k')
-  .description('Teaches theOracle new specials. Say entity (think of it as a unique pet name), name, type and optionally a set of comma separated Tags')
-  .action((entity, name, type, tags) => learn(entity, name, type, tags));
+  .description('Teaches theOracle new specials. Say entity (think of it as a unique pet name), name, type and optionally a set of comma separated Tags, image or text that represents the entity')
+  .action((entity, name, type, tags, image, text) => learn(entity, name, type, tags));
 
 program.parse(process.argv);
 
