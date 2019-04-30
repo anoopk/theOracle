@@ -26,7 +26,7 @@ const learn = (entity, name, type, tags, image, text) => {
 	}
 	catch(err){
 		console.log("Creating a new ", entity);
-		refresh(entity)	
+		create(entity)
 	}
 }
 
@@ -42,10 +42,8 @@ const forget = (entity) => {
 
 const listSpecials = () => {
 	try{
-		var special = fs.readFileSync(knowledge + ".json")	
-		json = JSON.parse(special)
-		console.log(json)
-		return json
+		var knowledge = require('../knowledge.json')		
+		console.log(knowledge)	
 	}
 	catch(err){
 		console.log("I have no Specials to offer. Teach me. Type theO --help to learn how.");
@@ -69,6 +67,14 @@ const list = (entity, what) => {
 		}
 	}
 	else listSpecials()
+}
+
+function create(entity){
+	var knowledge = require('../knowledge.json')
+	knowledge.entities.push(entity)
+	fs.writeFileSync('./knowledge.json', JSON.stringify(knowledge))
+	
+	fs.writeFileSync(entity +".json", JSON.stringify(json))	
 }
 
 function refresh(entity){
