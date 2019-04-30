@@ -100,6 +100,7 @@ program
 program
   .command('list [Entity] [Name] Type] [Tags]')
   .alias('l')
+  .option('-s', '--specials', "Lists all the Special Entities")
   .description('Details of the Special')
   .action((entity, name, type, tags) => list(entity, name, type, tags))
 
