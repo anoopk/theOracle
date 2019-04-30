@@ -46,8 +46,11 @@ const forget = (entity) => {
 
 const listSpecials = () => {
 	try{
-		var knowledge = require('../knowledge.json')		
-		assert(knowledge.entities)	
+		var knowledge = require('../knowledge.json')
+		if(knowledge.entities.length == 0){
+			assert(false)
+		}			
+		console.log(knowledge.entities)	
 	}
 	catch(err){
 		console.log("I have no Specials to offer. Teach me. Type theO --help to learn how.");
