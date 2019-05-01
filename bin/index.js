@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const colors = require('colors')
-const specials = require('../lib/specials.js') 
+const specials = require('../lib/specials.js')
 
 function list(entity, args){
 	if(args.specials){
@@ -22,6 +22,15 @@ function forget(entity){
 	specials.forget(entity)
 }
 
+function analyse(entity, args){
+	if(args.landmark){
+		console.log();
+		const analyser = require('../../Brahma-microservices/services/transformers/gcp/gcp.js')
+		analyser.annotate(entity, JSON.parse('{"landmarks": true}'))
+	}
+	
+}
+
 
 const program = require('commander');
 
@@ -41,6 +50,29 @@ program
   .option('-s, --specials', 'Sets up the specials data')
   .option('-p, --profile', 'Sets up the specials data')
   .alias('l')
+  .description('Details of the contents of the named stream')
+  .action((entity, args) => list(entity, args))
+
+program
+  .command('analyze <Entity>')
+  .option('-f, --folderLocation', 'Sets up the specials data')
+  .option('-t, --text', 'Analyzes text sentiment using the Aylien Engine')
+  .option('-i, --images', 'Analyzes images using various providers')
+  .option('-il, --landmarks', 'Detects landmarks in images using GCP')
+  .option('-it, --text', 'Detects text in images using AWS')
+  .option('-ia, --labels', 'Annotates or tags the images using AWS')
+  .option('-if, --faces', 'Detects faces in images using the AWS')
+  .option('-io, --logos', 'Detects logos in images using the GCP')
+  .alias('a')
+  .description('Details of the contents of the named stream')
+  .action((entity, args) => analyse(entity, args))
+
+program
+  .command('profile <Entity>')
+  .option('-f, --folderLocation', 'Sets up the specials data')
+  .option('-i, --images', 'Sets up the specials data')
+  .option('-t, --text', 'Sets up the specials data')
+  .alias('p')
   .description('Details of the contents of the named stream')
   .action((entity, args) => list(entity, args))
 
