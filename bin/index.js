@@ -1,11 +1,17 @@
 #!/usr/bin/env node
-
-const fs = require('fs')
-var json = new Map()
+const colors = require('colors')
 const specials = require('../lib/specials.js') 
 
-function list(entity, name, type, tags){
-	specials.list(entity, name, type, tags)
+function list(entity, args){
+	if(args.specials){
+		specials.list(entity)
+	}
+	if(args.analysis){
+		console.log("Analysis support coming soon.")
+	}
+	if(args.profile){
+		console.log("Profile support coming soon.")
+	}
 }
 
 function learn(entity, name, type, tags, image, text){
@@ -30,11 +36,13 @@ program
   .action((entity) => forget(entity))
 
 program
-  .command('list [Entity] [Name] [Type] [Tags]')
+  .command('list [Entity]')
+  .option('-a, --analysis', 'Sets up the specials data')
+  .option('-s, --specials', 'Sets up the specials data')
+  .option('-p, --profile', 'Sets up the specials data')
   .alias('l')
-  .option('-s', '--specials', "Lists all the Special Entities")
-  .description('Details of the Special')
-  .action((entity, name, type, tags) => list(entity, name, type, tags))
+  .description('Details of the contents of the named stream')
+  .action((entity, args) => list(entity, args))
 
 program
   .command('learn <Entity> <Name> <Type> [Tags] [Image] [Text]')
