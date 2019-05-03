@@ -1,6 +1,16 @@
 #!/usr/bin/env node
 const colors = require('colors')
 const specials = require('../lib/specials.js')
+const theo = require('../lib/theo.js')
+
+function configure(config, entity, args){
+	if(args.folder){
+		theo.configure(config)
+	}
+	if(args.entity){
+		theo.configure(config, entity)
+	}	
+}
 
 function list(entity, args){
 	if(args.specials){
@@ -27,8 +37,7 @@ function analyse(entity, args){
 		console.log();
 		const analyser = require('../../Brahma-microservices/services/transformers/gcp/gcp.js')
 		analyser.annotate(entity, JSON.parse('{"landmarks": true}'))
-	}
-	
+	}	
 }
 
 
@@ -46,11 +55,11 @@ program
 
 program
   .command('list [Entity]')
-  .option('-a, --analysis', 'Sets up the specials data')
-  .option('-s, --specials', 'Sets up the specials data')
-  .option('-p, --profile', 'Sets up the specials data')
+  .option('-a, --analysis', 'Queries the analysis data')
+  .option('-s, --specials', 'Queries the specials data')
+  .option('-p, --profile', 'Queries the profile data')
   .alias('l')
-  .description('Details of the contents of the named stream')
+  .description('CLI based tool to query the information gathered by the pipelines')
   .action((entity, args) => list(entity, args))
 
 program
@@ -64,23 +73,30 @@ program
   .option('-if, --faces', 'Detects faces in images using the AWS')
   .option('-io, --logos', 'Detects logos in images using the GCP')
   .alias('a')
-  .description('Details of the contents of the named stream')
+  .description('Starts the pipeline that analyzes images and text simultaneously using the best providers for the job, based on the options')
   .action((entity, args) => analyse(entity, args))
 
 program
+  .command('configure <jsonConfig> [folder]')
+  .alias('c')
+  .option('-f, --folder', "Sets the common folder which the SDK reads and writes data from")  
+  .option('-i, --identity', "Sets the configuration for an entity")
+  .description('Sets the configuration settings for the SDK')
+  .action((config, folder, args) => configure(config, folder, args))
+
+program
   .command('profile <Entity>')
-  .option('-f, --folderLocation', 'Sets up the specials data')
   .option('-i, --images', 'Sets up the specials data')
   .option('-t, --text', 'Sets up the specials data')
   .alias('p')
-  .description('Details of the contents of the named stream')
+  .description('Starts the pipeline that profiles an entity based on the (image/text) analysis performed. In a nutshell this adds meta tags to the entity based on the tags added to the images and text associated with it')
   .action((entity, args) => list(entity, args))
 
 program
   .command('learn <Entity> <Name> <Type> [Tags] [Image] [Text]')
   .alias('k')
   .option('-i, --image', "Image representation of the special")
-  .option('-i, --image', "Text that represents the special")
+  .option('-t, --text', "Text that represents the special")
   .description('Teaches theOracle new specials. Say entity (think of it as a unique pet name), name, type and optionally a set of comma separated Tags, image or text that represents the entity')
   .action((entity, name, type, tags, image, text) => learn(entity, name, type, tags, image, text));
 
