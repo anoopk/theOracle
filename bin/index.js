@@ -40,7 +40,6 @@ function analyse(entity, args){
 	}	
 }
 
-
 const program = require('commander');
 
 program
