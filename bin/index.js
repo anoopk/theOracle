@@ -12,9 +12,9 @@ function configure(config, entity, args){
 	}	
 }
 
-function list(entity, args){
+function list(entity, filter, args){
 	if(args.specials){
-		specials.list(entity)
+		specials.list(entity, filter)
 	}
 	if(args.analysis){
 		console.log("Analysis support coming soon.")
@@ -53,13 +53,13 @@ program
   .action((entity) => forget(entity))
 
 program
-  .command('list [Entity]')
+  .command('list [Entity] [filter]')
   .option('-a, --analysis', 'Queries the analysis data')
   .option('-s, --specials', 'Queries the specials data')
   .option('-p, --profile', 'Queries the profile data')
   .alias('l')
   .description('CLI based tool to query the information gathered by the pipelines')
-  .action((entity, args) => list(entity, args))
+  .action((entity, filter, args) => list(entity, filter, args))
 
 program
   .command('analyze <Entity>')
