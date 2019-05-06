@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const colors = require('colors')
+
 const specials = require('../lib/specials.js')
+const analysis = require('../lib/analysis.js')
 const theo = require('../lib/theo.js')
 
 function configure(config, entity, args){
@@ -17,7 +19,7 @@ function list(entity, filter, args){
 		specials.list(entity, filter)
 	}
 	if(args.analysis){
-		console.log("Analysis support coming soon.")
+		analysis.list(entity, filter)
 	}
 	if(args.profile){
 		console.log("Profile support coming soon.")
