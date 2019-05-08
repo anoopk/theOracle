@@ -18,12 +18,13 @@ function list(entity, filter, args){
 	if(args.specials){
 		specials.list(entity, filter)
 	}
-	if(args.analysis){
+	else if(args.analysis){
 		analysis.list(entity, filter)
 	}
-	if(args.profile){
+	else if(args.profile){
 		console.log("Profile support coming soon.")
 	}
+	else specials.list(entity, filter)
 }
 
 function learn(entity, name, type, tags, image, text){
