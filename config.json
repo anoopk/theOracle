@@ -3,6 +3,6 @@
 		"dataLocation": "D:/anoop/theOracle/data/",
 		"vision":  {"aspects": ["landmarks", "logos"]},
 		"rekognition":  {"aspects": ["labels", "texts", "spcials"]},
-		"tags": ["Sports", "Athlete"]
+		"tags": ["Sports", "Athlete", "Cricket", "Crowd"]
 	}
 }
