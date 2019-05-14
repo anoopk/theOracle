@@ -1,3 +1,8 @@
 {
-	"dataLocation":"D:/anoop/theOracle/data/"
+	"pecfy" :{
+		"dataLocation": "D:/anoop/theOracle/data/",
+		"vision":  {"aspects": ["landmarks", "logos"]},
+		"rekognition":  {"aspects": ["labels", "texts", "spcials"]},
+		"tags": ["Sports", "Athlete"]
+	}
 }
