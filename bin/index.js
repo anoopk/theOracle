@@ -14,6 +14,10 @@ function configure(config, entity, args){
 	}	
 }
 
+function check(image, community){
+	analysis.check(image, community)
+}
+
 function list(entity, filter, args){
 	if(args.specials){
 		specials.list(entity, filter)
@@ -54,6 +58,12 @@ program
   .alias('f')
   .description('Forgets a Special')
   .action((entity) => forget(entity))
+
+program
+  .command('check <image> <community>')
+  .alias('c')
+  .description('Checks if an image meets the guidelines of the community')
+  .action((image, community) => check(image, community))
 
 program
   .command('list [Entity] [filter]')
