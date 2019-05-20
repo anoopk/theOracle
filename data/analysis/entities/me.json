@@ -1,1 +1,2 @@
-{"image":"me.jpg","text":"Anoop Kumar","name":"Anoop Kumar","type":"Self","tags":"[programmer, musician]"}
+	{"entity":{"image":"me.jpg","text":"Anoop Kumar","name":"Anoop Kumar","type":"self"}
+

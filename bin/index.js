@@ -95,7 +95,7 @@ program
   .action((entity, args) => list(entity, args))
 
 program
-  .command('learn <Entity> <Name> <Type> [Tags] [Image] [Text]')
+  .command('meet <Entity> <Name> <Type> [Tags] [Image] [Text]')
   .alias('k')
   .option('-i, --image', "Image representation of the special")
   .option('-t, --text', "Text that represents the special")

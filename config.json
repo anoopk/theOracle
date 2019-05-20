@@ -1,3 +1,8 @@
 {
-	"dataLocation":"D:\\N15477 P13353\\D Drive\\Projects\\Samples\\theOracle\\data\\analysis"
+	"pecfy" :{
+		"dataLocation": "D:/anoop/theOracle/data/",
+		"vision":  {"aspects": ["landmarks", "logos"]},
+		"rekognition":  {"aspects": ["labels", "texts", "spcials"]},
+		"tags": ["Sports", "Athlete", "Cricket", "Crowd", "kohli"]
+	}
 }
